@@ -1,0 +1,14 @@
+name: Call Private Repo Workflow
+
+on: [push, pull_request]  # Or other events as needed
+
+jobs:
+  reusable_workflow_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Reusable Workflow in Private Repo
+        uses: {owner}/{private-repo}/.github/workflows/{workflow-file}@{ref}
+        with:
+          some-input: value  # Example input
+        secrets:
+          envPAT: ${{ secrets.envPAT }}
