@@ -3,9 +3,6 @@ name: Call Private Repo Workflow
 on: 
   workflow_dispatch: 
 
-# jobs:
-#   reusable_workflow_job:
-#     uses: ldraney/private-repo/.github/workflows/private-workflow.yml@master
 jobs:
   trigger-private-workflow:
     runs-on: ubuntu-latest
