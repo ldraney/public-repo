@@ -5,6 +5,6 @@ on:
 
 jobs:
   reusable_workflow_job:
-    uses: ldraney/private-repo/.github/workflows/pizza-workflow.yml@master
+    uses: ldraney/private-repo/.github/workflows/private-workflow.yml@master
     secrets:
       envPAT: ${{ secrets.envPAT }}
