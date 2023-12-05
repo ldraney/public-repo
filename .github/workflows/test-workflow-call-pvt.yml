@@ -4,7 +4,7 @@ on:
   workflow_dispatch: 
 
 jobs:
-  call-workflow-passing-data:
-    uses: octo-org/example-repo/.github/workflows/reusable-workflow.yml@main
+  reusable_workflow_job:
+    uses: ldraney/dotfiles-codespace/.github/workflows/private-workflow.yml@master
     secrets:
       envPAT: ${{ secrets.envPAT }}
