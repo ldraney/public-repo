@@ -8,9 +8,10 @@ on:
 #     uses: ldraney/private-repo/.github/workflows/private-workflow.yml@master
 jobs:
   trigger-private-workflow:
-      steps:
-        - name: Trigger workflow in private repo
-          run: |
-            curl -XPOST -H "Authorization: token ${{ secrets.envPAT }}" -H "Accept: application/vnd.github.v3+json" \
-            -d '{"event_type": "trigger-private-workflow"}' \
-            https://api.github.com/repos/ldraney/private-repo/dispatches      
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger workflow in private repo
+        run: |
+          curl -XPOST -H "Authorization: token ${{ secrets.envPAT }}" -H "Accept: application/vnd.github.v3+json" \
+          -d '{"event_type": "trigger-private-workflow"}' \
+          https://api.github.com/repos/ldraney/private-repo/dispatches      
