@@ -14,7 +14,6 @@ jobs:
     steps:
     - name: Call Private Repo Workflow
       trigger-private-workflow:
-        runs-on: ubuntu-latest
         steps:
           - name: Trigger workflow in private repo
             uses: convictional/trigger-workflow-and-wait@v1.6.1
