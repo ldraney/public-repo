@@ -15,7 +15,7 @@ jobs:
           
       - name: Provide Link to Running Workflow
         run: |
-        # Provide the URL to the regression test workflow
+          echo "View the regression test workflow at: https://github.com/ldraney/private-repo/actions"        
        
       - name: Wait for Regression Test to Complete
         run: |
