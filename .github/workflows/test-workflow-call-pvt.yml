@@ -12,12 +12,6 @@ jobs:
   trigger-private-workflow:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger workflow in private repo
-        run: |
-          curl -XPOST -H "Authorization: token ${{ secrets.envPAT }}" -H "Accept: application/vnd.github.v3+json" \
-          -d '{"event_type": "trigger-private-workflow", "client_payload": {"environment": "${{ github.event.inputs.environment }}"}' \
-          https://api.github.com/repos/ldraney/private-repo/dispatches
-          
       - name: Call Private Repo Workflow
           trigger-private-workflow:
             runs-on: ubuntu-latest
@@ -27,6 +21,6 @@ jobs:
                 with:
                   owner: ldraney
                   repo: private-repo
-                  github_token: ${{ secrets.PRIVATE_REPO_GITHUB_TOKEN }}
-                  workflow_file_name: main.yml
+                  github_token: ${{ secrets.envPAT }}
+                  workflow_file_name: private-workflow.yml
                   client_payload: '{"environment": "${{ github.event.inputs.environment }}"}'
