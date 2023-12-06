@@ -1,7 +1,12 @@
 name: Call Private Repo Workflow
 
 on: 
-  workflow_dispatch: 
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment (dev, staging, or perf)'
+        required: true
+        type: string
 
 jobs:
   trigger-private-workflow:
@@ -10,23 +15,5 @@ jobs:
       - name: Trigger workflow in private repo
         run: |
           curl -XPOST -H "Authorization: token ${{ secrets.envPAT }}" -H "Accept: application/vnd.github.v3+json" \
-          -d '{"event_type": "trigger-private-workflow"}' \
-          https://api.github.com/repos/ldraney/private-repo/dispatches      
-          
-      - name: Provide Link to Running Workflow
-        run: |
-          echo "View the regression test workflow at: https://github.com/ldraney/private-repo/actions"        
-       
-      - name: Wait for Regression Test to Complete
-        run: |
-        # Using gh CLI to wait for the regression test to complete
-        # Loop with delay to check the status
-          
-      - name: Check Regression Test Outcome
-        run: |
-         # Determine if the regression test passed or failed
-        
-      - name: Retrieve Artifact URL
-        if: failure() # Only run this step if the regression test failed
-        run: |
-        # Retrieve the artifact URL from the regression test
+          -d '{"event_type": "trigger-private-workflow", "client_payload": {"environment": "${{ github.event.inputs.environment }}"}' \
+          https://api.github.com/repos/ldraney/private-repo/dispatches
