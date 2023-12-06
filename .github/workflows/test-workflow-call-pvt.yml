@@ -30,4 +30,3 @@ jobs:
         if: failure() # Only run this step if the regression test failed
         run: |
         # Retrieve the artifact URL from the regression test
-          
