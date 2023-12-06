@@ -12,14 +12,11 @@ jobs:
   trigger-private-workflow:
     runs-on: ubuntu-latest
     steps:
-    - name: Call Private Repo Workflow
-      trigger-private-workflow:
-        steps:
-          - name: Trigger workflow in private repo
-            uses: convictional/trigger-workflow-and-wait@v1.6.1
-            with:
-              owner: ldraney
-              repo: private-repo
-              github_token: ${{ secrets.envPAT }}
-              workflow_file_name: private-workflow.yml
-              client_payload: '{"environment": "${{ github.event.inputs.environment }}"}'
+    - name: Trigger workflow in private repo
+      uses: convictional/trigger-workflow-and-wait@v1.6.1
+      with:
+        owner: ldraney
+        repo: private-repo
+        github_token: ${{ secrets.envPAT }}
+        workflow_file_name: private-workflow.yml
+        client_payload: '{"environment": "${{ github.event.inputs.environment }}"}'
