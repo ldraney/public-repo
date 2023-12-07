@@ -11,24 +11,8 @@ on:
 jobs:
   trigger-private-workflow:
     name: first job
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger workflow in private repo
-        run: |
-          curl -XPOST -H "Authorization: token ${{ secrets.envPAT }}" -H "Accept: application/vnd.github.v3+json" \
-          -d '{"event_type": "trigger-private-workflow", "client_payload": {"environment": "${{ github.event.inputs.environment }}"}' \
-          https://api.github.com/repos/ldraney/private-repo/dispatches
-
-  # trigger-private-workflow:
-  #   name: second job
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Trigger workflow in private repo
-  #       uses: convictional/trigger-workflow-and-wait@v1.6.1
-  #       with:
-  #         owner: ldraney
-  #         repo: private-repo
-  #         github_token: ${{ secrets.PRIVATE_REPO_GITHUB_TOKEN }}
-  #         workflow_file_name: main.yml
-  #         client_payload: '{"environment": "${{ github.event.inputs.environment }}"}'
-
+    uses: convictional/trigger-workflow-and-wait@v1.6.1
+    with:
+      owner: department-of-veterans-affairs/vanotify-infra
+      repo: vanotify-infra
+      github_token: ${{ secrets.envPAT }}
