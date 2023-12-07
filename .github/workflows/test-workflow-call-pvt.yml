@@ -16,11 +16,11 @@ jobs:
     - name: Trigger Workflow
       uses: convictional/trigger-workflow-and-wait@v1.6.1
       with:
-        owner: department-of-veterans-affairs
-        repo: vanotify-infra
+        owner: ldraney
+        repo: private-repo
         github_token: ${{ secrets.envPAT }}
-        github_user: github-user
-        workflow_file_name: .
+        # github_user: github-user
+        workflow_file_name: private-workflow.yml
         ref: master
         wait_interval: 1
         client_payload: '{"environment": "${{ github.event.inputs.environment }}"}'
