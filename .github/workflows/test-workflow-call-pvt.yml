@@ -19,3 +19,11 @@ jobs:
         owner: department-of-veterans-affairs
         repo: vanotify-infra
         github_token: ${{ secrets.envPAT }}
+        github_user: github-user
+        workflow_file_name: private-workflow.yml
+        ref: master
+        wait_interval: 1
+        client_payload: '{}'
+        propagate_failure: true
+        trigger_workflow: true
+        wait_workflow: true
