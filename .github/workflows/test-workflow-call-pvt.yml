@@ -20,7 +20,7 @@ jobs:
         repo: vanotify-infra
         github_token: ${{ secrets.envPAT }}
         github_user: github-user
-        workflow_file_name: private-workflow.yml
+        workflow_file_name: .
         ref: master
         wait_interval: 1
         client_payload: '{"environment": "${{ github.event.inputs.environment }}"}'
