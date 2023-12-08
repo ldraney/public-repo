@@ -7,6 +7,10 @@ on:
         description: 'Environment (dev, staging, or perf)'
         required: true
         type: string
+      ref:
+        type: string
+        description: branch or tag or hash
+        required: true
 
 jobs:
   trigger-private-workflow:
@@ -15,10 +19,11 @@ jobs:
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v4
-      Default: ${{ github.repository }}
+      with:
+        ref: ${{ inputs.ref }}
 
     - name: Trigger Workflow
-      uses: ./.github/actions/trigger-workflow-and-wait/action.yml@master
+      uses: ./.github/actions/trigger-workflow-and-wait/action.yml
       with:
         owner: ldraney
         repo: private-repo
