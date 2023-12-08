@@ -18,17 +18,17 @@ jobs:
       uses: actions/checkout@v4
       
   call-workflow:
-    - name: Trigger Workflow
-      uses: ./.github/actions/trigger-workflow-and-wait/action.yml
-      with:
-        owner: ldraney
-        repo: private-repo
-        github_token: ${{ secrets.envPAT }}
-        # github_user: github-user
-        workflow_file_name: private-workflow.yml
-        ref: master
-        wait_interval: 1
-        client_payload: '{"environment": "${{ github.event.inputs.environment }}"}'
-        propagate_failure: true
-        trigger_workflow: true
-        wait_workflow: true
+    name: Trigger Workflow
+    uses: ./.github/actions/trigger-workflow-and-wait/action.yml
+    with:
+      owner: ldraney
+      repo: private-repo
+      github_token: ${{ secrets.envPAT }}
+      # github_user: github-user
+      workflow_file_name: private-workflow.yml
+      ref: master
+      wait_interval: 1
+      client_payload: '{"environment": "${{ github.event.inputs.environment }}"}'
+      propagate_failure: true
+      trigger_workflow: true
+      wait_workflow: true
