@@ -15,6 +15,7 @@ jobs:
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v4
+      Default: ${{ github.repository }}
 
     - name: Trigger Workflow
       uses: ./.github/actions/trigger-workflow-and-wait/action.yml@master
