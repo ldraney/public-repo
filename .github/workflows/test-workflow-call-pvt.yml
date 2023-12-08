@@ -22,7 +22,6 @@ jobs:
 
     - name: Trigger Workflow
       uses: ./.github/actions/trigger-workflow-and-wait
-      submodules: true
       with:
         owner: ldraney
         repo: private-repo
