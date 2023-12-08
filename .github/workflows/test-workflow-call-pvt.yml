@@ -17,6 +17,7 @@ jobs:
     - name: Checkout Repo
       uses: actions/checkout@v4
       
+  call-workflow:
     - name: Trigger Workflow
       uses: ./.github/actions/trigger-workflow-and-wait/action.yml
       with:
