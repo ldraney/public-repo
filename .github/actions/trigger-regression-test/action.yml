@@ -56,7 +56,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - run: echo "pwd ls -al" && echo "\n this is on a new line"  
+    - run: pwd && ls -al && echo "\n this is on a new line"  
       shell: bash
     #- run: ./trigger_script.sh
       #shell: bash
