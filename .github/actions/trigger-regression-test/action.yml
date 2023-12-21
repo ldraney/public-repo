@@ -60,5 +60,5 @@ runs:
       #shell: bash
     - run: cd .github/actions/trigger-regression-test && chmod 755 trigger_script.sh 
       shell: bash
-    - run: bash .github/actions/trigger-regression-test/trigger_script.sh
+    - run: ./.github/actions/trigger-regression-test/trigger_script.sh
       shell: bash
