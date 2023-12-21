@@ -58,5 +58,5 @@ runs:
   steps:
     - run: echo "$(pwd && ls -al && echo \n this is on a new line)"  >> $GITHUB_STEP_SUMMARY
       shell: bash
-    #- run: ./trigger_script.sh
-      #shell: bash
+    - run: .github/actions/trigger-regression-test/trigger_script.sh
+      shell: bash
