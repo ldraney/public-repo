@@ -54,5 +54,13 @@ outputs:
   conclusion:
     description: Conclusion of the job, i.e pass/failure
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "composite"
+  steps:
+    #- run: echo "$(pwd && ls -al && echo \n this is on a new line)"  >> $GITHUB_STEP_SUMMARY
+      #shell: bash
+    - run: cd .github/actions/trigger-regression-test && chmod 755 trigger_script.sh 
+      shell: bash
+    - run: echo $INPUT_OWNER
+      shell: bash
+    #- run: ./.github/actions/trigger-regression-test/trigger_script.sh
+      #shell: bash
