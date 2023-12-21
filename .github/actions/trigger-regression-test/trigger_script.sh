@@ -149,7 +149,12 @@ trigger_workflow() {
   done
 
   # Return new run ids
-  join -v2 <(echo "$OLD_RUNS") <(echo "$NEW_RUNS")
+  #join -v2 <(echo "$OLD_RUNS") <(echo "$NEW_RUNS")
+  echo "$OLD_RUNS" > old_runs.txt
+  echo "$NEW_RUNS" > new_runs.txt
+  join -v2 old_runs.txt new_runs.txt
+  rm old_runs.txt new_runs.txt  # Clean up temporary files
+
 }
 
 comment_downstream_link() {
