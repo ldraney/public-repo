@@ -61,5 +61,6 @@ runs:
     - run: cd .github/actions/trigger-regression-test && chmod 755 trigger_script.sh 
       shell: bash
     - run: echo "$INPUT_OWNER" >> $GITHUB_STEP_SUMMARY
+      shell: bash
     #- run: ./.github/actions/trigger-regression-test/trigger_script.sh
       #shell: bash
