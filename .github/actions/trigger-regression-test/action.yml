@@ -56,7 +56,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - run: pwd && ls -al && echo "\n this is on a new line"  >> $GITHUB_SUMMARY
+    - run: pwd && ls -al && echo "\n this is on a new line"  >> $GITHUB_STEP_SUMMARY
       shell: bash
     #- run: ./trigger_script.sh
       #shell: bash
