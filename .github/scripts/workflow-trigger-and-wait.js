@@ -6,6 +6,11 @@ const triggerAndWait = async ({ github, context }) => {
   const workflow_id = 'private-workflow.yml'; // Replace with your workflow file name or ID
   const ref = 'master'; // Usually main or master
 
+    // Define the inputs required by the workflow
+  const inputs = {
+    environment: 'your-environment', // Replace with the actual environment value or use dynamic input
+  };
+
   // Trigger the workflow
   console.log(`Triggering workflow: ${workflow_id} on ${owner}/${repo}`);
   await github.rest.actions.createWorkflowDispatch({
@@ -13,7 +18,7 @@ const triggerAndWait = async ({ github, context }) => {
     repo,
     workflow_id,
     ref,
-    inputs: { /* your inputs here */ },
+    inputs,
   });
 
   // Wait a moment for the workflow run to be initialized
