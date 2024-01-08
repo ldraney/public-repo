@@ -23,7 +23,7 @@ jobs:
     - name: Trigger and Wait for Workflow
       uses: actions/github-script@v6
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        github-token: ${{ secrets.ENVPAT }}
         script: |
           const path = '.github/scripts/workflow-trigger-and-wait.js';
           const triggerAndWait = require(path);
