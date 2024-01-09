@@ -35,8 +35,8 @@ jobs:
       with:
         github-token: ${{ secrets.ENVPAT }}
         # name: hello-world-output
-        repository: ldraney/private-repo
+        # repository: ldraney/private-repo
           
 
-    - name: Display Artifact Content
-      run: cat artifacts/hello-world-output/output.txt
+    # - name: Display Artifact Content
+      # run: cat artifacts/hello-world-output/output.txt
