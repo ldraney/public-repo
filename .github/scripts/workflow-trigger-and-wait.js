@@ -50,18 +50,22 @@ const triggerAndWait = async ({ github, context }) => {
   } while (status !== 'completed');
 
   // Log the conclusion and the workflow URL
-console.log(`Workflow conclusion: ${conclusion}`);
-console.log(`Workflow run URL: ${workflow_url}`);
+  console.log(`Workflow conclusion: ${conclusion}`);
+  console.log(`Workflow run URL: ${workflow_url}`);
 
-if (conclusion === 'success' || conclusion === 'failure') {
-  // Fetch the URL to download logs
-  const logs = await github.rest.actions.downloadWorkflowRunLogs({
-    owner,
-    repo,
-    run_id,
-  });
-  console.log(`Workflow logs URL: ${logs.url}`);
-}
+  // Fetch the logs or outputs if necessary
+  if (conclusion === 'success') {
+    // If your workflow produces artifacts, you can fetch them here
+    const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+      owner,
+      repo,
+      run_id,
+    });
+    console.log('Artifacts:', artifacts.data.artifacts);
+    // Additional processing to download or extract data from artifacts can be done here
+  } else {
+    console.log('Workflow failed. No artifacts fetched.');
+  }
 };
 
 module.exports = triggerAndWait;

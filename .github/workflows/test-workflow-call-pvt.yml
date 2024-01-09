@@ -29,3 +29,13 @@ jobs:
           const triggerAndWait = require(path);
           triggerAndWait({github, context});
 
+
+    - name: Download Artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: hello-world-output
+        repo: ldraney/private-repo
+        path: artifacts
+
+    - name: Display Artifact Content
+      run: cat artifacts/hello-world-output/output.txt
