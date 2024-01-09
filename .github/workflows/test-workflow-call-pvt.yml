@@ -15,21 +15,17 @@ on:
 jobs:
   trigger-private-workflow:
     runs-on: ubuntu-latest  # specify the runner
-    name: first job
+    # name: first job
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v4
 
-    - name: Trigger Workflow
-      uses: ./.github/actions/pizza
+    - name: Trigger and Wait for Workflow
+      uses: actions/github-script@v6
       with:
-        owner: ldraney
-        repo: private-repo
-        github_token: ${{ secrets.envPAT }}
-        workflow_file_name: private-workflow.yml
-        ref: master
-        wait_interval: 1
-        client_payload: '{"environment": "${{ github.event.inputs.environment }}"}'
-        propagate_failure: true
-        trigger_workflow: true
-        wait_workflow: true
+        github-token: ${{ secrets.ENVPAT }}
+        script: |
+          const path = '.github/scripts/workflow-trigger-and-wait.js';
+          const triggerAndWait = require(path);
+          triggerAndWait({github, context});
+
