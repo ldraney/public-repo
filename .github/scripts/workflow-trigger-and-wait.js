@@ -70,7 +70,7 @@ const triggerAndWait = async ({ github, context }) => {
   console.log(`Workflow conclusion: ${conclusion}`);
   console.log(`Workflow run URL: ${workflow_url}`);
 
-  const jobs = await octokit.rest.actions.listJobsForWorkflowRun({
+  const jobs = await github.rest.actions.listJobsForWorkflowRun({
 	owner,
 	repo,
 	run_id: run_id, // Replace with the actual run ID
