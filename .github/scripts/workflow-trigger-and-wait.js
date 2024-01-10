@@ -1,13 +1,14 @@
 const triggerAndWait = async ({ github, context }) => {
-  const owner = 'ldraney'; // Replace with your GitHub username or organization
-  const repo = 'private-repo'; // Replace with your repository name
+  const owner = 'ldraney'; // the private repo owner
+  const repo = 'private-repo'; // the private repo 
   const workflow_id = 'private-workflow.yml'; // Replace with your workflow file name or ID
-  const ref = 'master'; // Usually main or master
+  const workfow_ref = 'master'; // branch of the workflow you want to use
 
   // Define the inputs required by the workflow
   const inputs = {
-    environment: 'your-environment', // Replace with the actual environment value or use dynamic input
-  };
+  environment: context.payload.inputs.environment,
+  ref: context.payload.inputs.ref,
+};
 
   // Trigger the workflow
   console.log(`Triggering workflow: ${workflow_id} on ${owner}/${repo}`);
@@ -15,7 +16,7 @@ const triggerAndWait = async ({ github, context }) => {
     owner,
     repo,
     workflow_id,
-    ref,
+    workflow_ref,
     inputs,
   });
 
@@ -27,7 +28,6 @@ const triggerAndWait = async ({ github, context }) => {
     owner,
     repo,
     workflow_id,
-    status: 'queued',
   });
 
   let run_id = runs.data.workflow_runs[0].id;
