@@ -28,7 +28,7 @@ const triggerAndWait = async ({ github, context }) => {
   // Poll for the workflow run
   let run_id;
   while (!run_id) {
-	const runs = await octokit.rest.actions.listWorkflowRuns({
+	const runs = await github.rest.actions.listWorkflowRuns({
 	  owner,
 	  repo,
 	  workflow_id,
