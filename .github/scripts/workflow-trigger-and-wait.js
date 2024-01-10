@@ -82,29 +82,32 @@ const triggerAndWait = async ({ github, context }) => {
 	return;
   }
 
+  console.log('the job is '${job}'')
+
+
   // Fetch the logs or outputs if necessary
-  if (conclusion === 'success') {
-	  const job_logs = github.rest.actions.downloadJobLogsForWorkflowRun({
-	  owner,
-	  repo,
-	  job_id,
-	  });
+  // if (conclusion === 'success') {
+	  // const job_logs = github.rest.actions.downloadJobLogsForWorkflowRun({
+	  // owner,
+	  // repo,
+	  // job_id,
+	  // });
 
-	  console.log('${job_logs}')
+	  // console.log('${job_logs}')
 
-    // // If your workflow produces artifacts, you can fetch them here
-    // const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
-      // owner,
-      // repo,
-      // run_id,
-    // });
-    // console.log('Artifacts:', artifacts.data.artifacts);
-    // // Additional processing to download or extract data from artifacts can be done here
-  } else {
-    // console.log('Workflow failed. No artifacts fetched.');
-	console.log('cannot find logs');
-  }
-};
+    // // // If your workflow produces artifacts, you can fetch them here
+    // // const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+      // // owner,
+      // // repo,
+      // // run_id,
+    // // });
+    // // console.log('Artifacts:', artifacts.data.artifacts);
+    // // // Additional processing to download or extract data from artifacts can be done here
+  // } else {
+    // // console.log('Workflow failed. No artifacts fetched.');
+	// console.log('cannot find logs');
+  // }
+// };
 
 module.exports = triggerAndWait;
 
