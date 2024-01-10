@@ -90,7 +90,7 @@ const triggerAndWait = async ({ github, context }) => {
 	  job_id,
 	  });
 
-	  console.log(${job_logs})
+	  console.log('${job_logs}')
 
     // // If your workflow produces artifacts, you can fetch them here
     // const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
@@ -102,7 +102,7 @@ const triggerAndWait = async ({ github, context }) => {
     // // Additional processing to download or extract data from artifacts can be done here
   } else {
     // console.log('Workflow failed. No artifacts fetched.');
-	console.log('cannot find logs')
+	console.log('cannot find logs');
   }
 };
 
