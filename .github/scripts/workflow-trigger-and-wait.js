@@ -7,7 +7,7 @@ const triggerAndWait = async ({ github, context }) => {
   // Define the inputs required by the workflow
   const inputs = {
   environment: context.payload.inputs.environment,
-  ref: context.payload.inputs.ref,
+  // ref: context.payload.inputs.ref,
 };
 
   // Trigger the workflow
