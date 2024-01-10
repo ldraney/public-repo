@@ -49,45 +49,45 @@ const triggerAndWait = async ({ github, context }) => {
   console.log(`Triggered workflow run ID: ${run_id}`);
 
   // Wait for the workflow to complete
-  // let status;
-  // let conclusion;
-  // let workflow_url = `https://github.com/${owner}/${repo}/actions/runs/${run_id}`;
-  // do {
-    // await new Promise(r => setTimeout(r, 10000)); // Poll every 10 seconds
-    // const result = await github.rest.actions.getWorkflowRun({
-      // owner,
-      // repo,
-      // run_id,
-    // });
-    // status = result.data.status;
-    // conclusion = result.data.conclusion;
-    // console.log(`Current status: ${status}`);
-  // } while (status !== 'completed');
+  let status;
+  let conclusion;
+  let workflow_url = `https://github.com/${owner}/${repo}/actions/runs/${run_id}`;
+  do {
+    await new Promise(r => setTimeout(r, 10000)); // Poll every 10 seconds
+    const result = await github.rest.actions.getWorkflowRun({
+      owner,
+      repo,
+      run_id,
+    });
+    status = result.data.status;
+    conclusion = result.data.conclusion;
+    console.log(`Current status: ${status}`);
+  } while (status !== 'completed');
 
-  // // Log the conclusion and the workflow URL
-  // console.log(`Workflow conclusion: ${conclusion}`);
-  // console.log(`Workflow run URL: ${workflow_url}`);
+  // Log the conclusion and the workflow URL
+  console.log(`Workflow conclusion: ${conclusion}`);
+  console.log(`Workflow run URL: ${workflow_url}`);
 
-  // const jobs = await octokit.rest.actions.listJobsForWorkflowRun({
-	// owner,
-	// repo,
-	// run_id: run_id, // Replace with the actual run ID
-  // });
+  const jobs = await octokit.rest.actions.listJobsForWorkflowRun({
+	owner,
+	repo,
+	run_id: run_id, // Replace with the actual run ID
+  });
 
-  // // Fetch the logs or outputs if necessary
-  // if (conclusion === 'success') {
-    // // If your workflow produces artifacts, you can fetch them here
-    // const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
-      // owner,
-      // repo,
-      // run_id,
-    // });
-    // console.log('Artifacts:', artifacts.data.artifacts);
-    // // Additional processing to download or extract data from artifacts can be done here
-  // } else {
-    // console.log('Workflow failed. No artifacts fetched.');
-  // }
-// };
+  // Fetch the logs or outputs if necessary
+  if (conclusion === 'success') {
+    // If your workflow produces artifacts, you can fetch them here
+    const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+      owner,
+      repo,
+      run_id,
+    });
+    console.log('Artifacts:', artifacts.data.artifacts);
+    // Additional processing to download or extract data from artifacts can be done here
+  } else {
+    console.log('Workflow failed. No artifacts fetched.');
+  }
+};
 
-// module.exports = triggerAndWait;
+module.exports = triggerAndWait;
 
