@@ -11,9 +11,12 @@ const triggerAndWait = async ({ github, context }) => {
   // ref: context.payload.inputs.ref,
 };
 
-  const triggerTimestamp = new Date().toISOString();
 
-  // Trigger the workflow
+  // Trigger the workflow after creating a timestamp
+  // The createWorkflowDispatch function triggers a workflow but does not immediately return the run_id of the workflow it initiates. 
+  // This is because the workflow run is queued and not instantly created.
+  // so the timestamp is used to get the soonest workflow run after the timestamp
+  const triggerTimestamp = new Date().toISOString();
   console.log(`Triggering workflow: ${workflow_id} on ${owner}/${repo}`);
   await github.rest.actions.createWorkflowDispatch({
     owner,
@@ -82,31 +85,36 @@ const triggerAndWait = async ({ github, context }) => {
 	return;
   }
 
-  console.log(`The job ID for '${jobName}' is ${job.id}`);
+  let job_id = job.id; // Storing the job ID in a variable
 
+  // Fetch and handle the job logs
+  github.rest.actions.downloadJobLogsForWorkflowRun({
+	owner,
+	repo,
+	job_id,
+  }).then(response => {
+	 // Assuming 'response' is a JSON object with log information
 
-  // Fetch the logs or outputs if necessary
-  // if (conclusion === 'success') {
-	  // const job_logs = github.rest.actions.downloadJobLogsForWorkflowRun({
-	  // owner,
-	  // repo,
-	  // job_id,
-	  // });
+  // If the response contains a direct link to download logs
+  if (response.data && response.data.download_url) {
+    console.log(`Download logs from: ${response.data.download_url}`);
+  } 
+  // If the response contains log content
+  else if (response.data && response.data.logs) {
+    console.log(`Job logs: ${response.data.logs}`);
+  } 
+  // Handling other JSON structures
+  else {
+    // Log the entire JSON response for analysis
+    console.log('Received JSON response:', JSON.stringify(response.data, null, 2));
+  }
 
-	  // console.log('${job_logs}')
+	console.log(`Job logs: ${response.data}`); // Adjust based on the actual format of the response
 
-    // // // If your workflow produces artifacts, you can fetch them here
-    // // const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
-      // // owner,
-      // // repo,
-      // // run_id,
-    // // });
-    // // console.log('Artifacts:', artifacts.data.artifacts);
-    // // // Additional processing to download or extract data from artifacts can be done here
-  // } else {
-    // // console.log('Workflow failed. No artifacts fetched.');
-	// console.log('cannot find logs');
-  // }
+  }).catch(error => {
+	console.log('Error fetching job logs:', error);
+  });
+
 };
 
 module.exports = triggerAndWait;
