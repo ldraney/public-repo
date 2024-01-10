@@ -2,7 +2,7 @@ const triggerAndWait = async ({ github, context }) => {
   const owner = 'ldraney'; // the private repo owner
   const repo = 'private-repo'; // the private repo 
   const workflow_id = 'private-workflow.yml'; // Replace with your workflow file name or ID
-  const workfow_ref = 'master'; // branch of the workflow you want to use
+  const workflow_ref = 'master'; // branch of the workflow you want to use
 
   // Define the inputs required by the workflow
   const inputs = {
