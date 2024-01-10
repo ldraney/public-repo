@@ -107,7 +107,7 @@ const triggerAndWait = async ({ github, context }) => {
     // // console.log('Workflow failed. No artifacts fetched.');
 	// console.log('cannot find logs');
   // }
-// };
+};
 
 module.exports = triggerAndWait;
 
