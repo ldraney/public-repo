@@ -82,7 +82,7 @@ const triggerAndWait = async ({ github, context }) => {
 	return;
   }
 
-  console.log('the job is '${job}'')
+  console.log(`the job is '${job}'`)
 
 
   // Fetch the logs or outputs if necessary
