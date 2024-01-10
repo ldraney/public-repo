@@ -96,18 +96,18 @@ const triggerAndWait = async ({ github, context }) => {
 	 // Assuming 'response' is a JSON object with log information
 
   // If the response contains a direct link to download logs
-  if (response.data && response.data.download_url) {
-    console.log(`Download logs from: ${response.data.download_url}`);
-  } 
-  // If the response contains log content
-  else if (response.data && response.data.logs) {
-    console.log(`Job logs: ${response.data.logs}`);
-  } 
-  // Handling other JSON structures
-  else {
-    // Log the entire JSON response for analysis
-    console.log('Received JSON response:', JSON.stringify(response.data, null, 2));
-  }
+  // if (response.data && response.data.download_url) {
+    // console.log(`Download logs from: ${response.data.download_url}`);
+  // } 
+  // // If the response contains log content
+  // else if (response.data && response.data.logs) {
+    // console.log(`Job logs: ${response.data.logs}`);
+  // } 
+  // // Handling other JSON structures
+  // else {
+    // // Log the entire JSON response for analysis
+    // console.log('Received JSON response:', JSON.stringify(response.data, null, 2));
+  // }
 
 	console.log(`Job logs: ${response.data}`); // Adjust based on the actual format of the response
 
